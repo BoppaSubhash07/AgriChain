@@ -1,0 +1,81 @@
+<main class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-top">
+      <a href="/" class="auth-back">&larr; Switch Role</a>
+      <span class="badge badge-gold">Farmer Portal</span>
+    </div>
+    <h1 class="auth-title">Farmer Sign In</h1>
+    <p class="auth-sub">Sign in using your Farmer ID or Phone Number with Password or Aadhaar Biometric.</p>
+
+    {{ error_html }}
+
+    <div class="auth-tabs" role="tablist">
+      <button type="button" class="auth-tab active" data-auth-mode="password">Password Login</button>
+      <button type="button" class="auth-tab" data-auth-mode="biometric">Biometric Sign-In</button>
+    </div>
+
+    <form method="POST" action="/login/farmer" autocomplete="off">
+      <input type="hidden" id="farmer-auth-mode" name="auth_mode" value="password">
+
+      <div class="form-group">
+        <label for="farmer_identifier">Farmer ID / Phone Number</label>
+        <input type="text" id="farmer_identifier" name="identifier" required
+               placeholder="e.g. FAR-001 or 9848011223"
+               value="{{ prev_identifier }}">
+      </div>
+
+      <!-- Mode A: Password with Animated Opening/Closing Eye -->
+      <div id="farmer-password-section" class="form-group">
+        <label for="farmer_password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="farmer_password" name="password" required
+                 placeholder="Enter your farmer portal password">
+          <button type="button" class="eye-toggle-btn" data-eye-toggle="farmer_password" aria-label="Show password">
+            <svg class="eye-svg" viewBox="0 0 32 24" aria-hidden="true">
+              <path class="eye-outline" d="M2 12 C7 4, 25 4, 30 12 C25 20, 7 20, 2 12 Z"/>
+              <circle class="eye-iris" cx="16" cy="12" r="5"/>
+              <circle class="eye-pupil" cx="16" cy="12" r="2.4"/>
+              <path class="eye-lid-upper" d="M2 12 C7 19, 25 19, 30 12"/>
+              <g class="eye-lashes">
+                <line x1="9" y1="16.5" x2="7.5" y2="19.5"/>
+                <line x1="16" y1="17.5" x2="16" y2="20.8"/>
+                <line x1="23" y1="16.5" x2="24.5" y2="19.5"/>
+              </g>
+              <line class="eye-slash" x1="5" y1="20" x2="27" y2="4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode B: Aadhaar Biometric Authentication -->
+      <div id="farmer-biometric-section" class="form-group hidden">
+        <div id="farmer-bio-pad" class="bio-pad" role="button" tabindex="0">
+          <div class="bio-thumb">&#128400;</div>
+          <div style="font-weight:700;color:#1e3a8a;">Tap Fingerprint / Iris Scanner</div>
+          <div id="farmer-bio-status" class="text-muted">Verify against your registered RBK biometric_authentication record</div>
+        </div>
+        <label for="farmer_aadhaar_last4">Registered Aadhaar Last 4 Digits (Biometric Token)</label>
+        <input type="text" id="farmer_aadhaar_last4" name="aadhaar_last4" maxlength="4"
+               placeholder="e.g. 9812">
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block">Sign In to Farmer Home &rarr;</button>
+    </form>
+
+    <div class="demo-box">
+      <div class="demo-box-title">Quick-Fill Demo Farmers (Password: <code class="mono">farmer@123</code>)</div>
+      <button type="button" class="demo-chip"
+              data-fill-target="farmer_identifier=FAR-001|farmer_password=farmer@123|farmer_aadhaar_last4=9812">
+        Ramesh Babu (FAR-001 &bull; Aadhaar 9812)
+      </button>
+      <button type="button" class="demo-chip"
+              data-fill-target="farmer_identifier=9848044556|farmer_password=farmer@123|farmer_aadhaar_last4=3319">
+        Siva Reddy (FAR-004 &bull; 9848044556)
+      </button>
+      <button type="button" class="demo-chip"
+              data-fill-target="farmer_identifier=FAR-012|farmer_password=farmer@123|farmer_aadhaar_last4=4129">
+        M. Srinivasulu Tenant (FAR-012)
+      </button>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,352 @@
+<main class="page-wrap portal-main" data-sync-endpoint="/api/farmer/state">
+  <section class="portal-banner farmer-theme">
+    <div>
+      <div class="badge badge-gold" style="background:rgba(255,255,255,0.2);color:#fff;margin-bottom:8px;">
+        Farmer 360&deg; Portal &bull; {{ farmer_id }}
+      </div>
+      <h1>Welcome, {{ farmer_name }}</h1>
+      <p>Phone: {{ phone }} &bull; Biometric Status: <strong>{{ biometric_status }}</strong> ({{ aadhaar_number }})</p>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:0.82rem;opacity:0.86;">Available KCC Balance</div>
+      <div style="font-size:1.5rem;font-weight:600;">&#8377;<span data-bind="kpi_kcc_avail">{{ kpi_kcc_avail }}</span></div>
+    </div>
+  </section>
+
+  <div class="live-sync-bar">
+    <div class="live-sync-status">
+      <span class="live-dot" id="live-sync-dot"></span>
+      <span>Live MySQL Sync</span>
+      <span id="live-sync-time" class="mono">Ready</span>
+    </div>
+    <div class="btn-group-inline">
+      <label style="margin:0;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;cursor:pointer;">
+        <input type="checkbox" id="live-sync-toggle" checked style="width:auto;min-height:auto;">
+        Auto-refresh (15s)
+      </label>
+      <button type="button" class="btn btn-outline btn-sm" id="live-sync-now">Sync Now</button>
+    </div>
+  </div>
+
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Land &amp; Farm Fields</div>
+      <div class="kpi-value"><span data-bind="kpi_total_acres">{{ kpi_total_acres }}</span> ac</div>
+      <div class="kpi-sub"><span data-bind="kpi_field_count">{{ kpi_field_count }}</span> mapped farm plots</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">KCC Loan Balance Used</div>
+      <div class="kpi-value">&#8377;<span data-bind="kpi_kcc_debt">{{ kpi_kcc_debt }}</span></div>
+      <div class="kpi-sub">Total limit: &#8377;<span data-bind="kpi_kcc_limit">{{ kpi_kcc_limit }}</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">RBK Input Spend</div>
+      <div class="kpi-value">&#8377;<span data-bind="kpi_input_spend">{{ kpi_input_spend }}</span></div>
+      <div class="kpi-sub"><span data-bind="kpi_prebook_count">{{ kpi_prebook_count }}</span> seasonal pre-bookings</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Buyer Produce Revenue</div>
+      <div class="kpi-value">&#8377;<span data-bind="kpi_sales_rev">{{ kpi_sales_rev }}</span></div>
+      <div class="kpi-sub"><span data-bind="kpi_sales_count">{{ kpi_sales_count }}</span> buyer orders placed</div>
+    </div>
+  </section>
+
+  <nav class="nav-tabs" aria-label="Farmer Sections">
+    <button type="button" class="tab-btn active" data-tab-target="ftab-profile">Profile &amp; Credit (KCC)</button>
+    <button type="button" class="tab-btn" data-tab-target="ftab-land">Land, Fields, Leases &amp; Soil</button>
+    <button type="button" class="tab-btn" data-tab-target="ftab-cultivation">Cultivations &amp; Season Inputs</button>
+    <button type="button" class="tab-btn" data-tab-target="ftab-inputs">RBK Purchases &amp; Pre-Bookings</button>
+    <button type="button" class="tab-btn" data-tab-target="ftab-sales">Buyer Orders &amp; Payouts</button>
+  </nav>
+
+  <!-- ==================== TAB 1: PROFILE & CREDIT ACCOUNTS ==================== -->
+  <section id="ftab-profile" class="tab-panel active">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Farmer Details &amp; Biometric Identity (<code class="mono">farmers</code>)</h2>
+        </div>
+        <div data-bind="profile_details_html">{{ profile_details_html }}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Registered Addresses (<code class="mono">farmer_addresses</code>)</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Type</th><th>Door No.</th><th>Village / Mandal</th><th>District / PIN</th></tr></thead>
+            <tbody data-bind="address_rows">{{ address_rows }}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Farmer Kisan Credit Accounts (<code class="mono">farmer_credit_accounts</code>)</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Bank / Institution</th><th>KCC Card #</th><th data-sort="number">Total Limit</th><th data-sort="number">Available Balance</th><th data-sort="number">Outstanding Debt</th><th>Repayment Due</th><th>Status</th></tr>
+          </thead>
+          <tbody data-bind="credit_rows">{{ credit_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 2: LAND, FIELDS, LEASES & SOIL ==================== -->
+  <section id="ftab-land" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Farmer Land Records (<code class="mono">farmer_land_records</code>)</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Survey No.</th><th>Passbook No.</th><th data-sort="number">Area (Acres)</th><th>Ownership</th><th>Village</th><th>Verified By</th></tr>
+          </thead>
+          <tbody data-bind="land_rows">{{ land_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Farm Fields (<code class="mono">farm_fields</code>)</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Survey &amp; Village</th><th data-sort="number">Area (Acres)</th><th>Soil Type</th><th>Irrigation</th><th>Access Role</th></tr>
+          </thead>
+          <tbody data-bind="field_rows">{{ field_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Seasonal Cultivation Rights &amp; Leases (<code class="mono">seasonal_cultivator_rights</code>)</h2>
+          <p class="card-sub">Shows both land given on lease (Owner) and land cultivated on lease via CCRC (Tenant).</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Your Role</th><th>Survey No. &amp; Village</th><th>Owner</th><th>Tenant</th><th>Agreement</th><th>Non-Encumbrance</th><th>Expiry</th><th>Status</th></tr>
+          </thead>
+          <tbody data-bind="lease_rows">{{ lease_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Soil Health Records (<code class="mono">soil_health_records</code>)</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Test Date</th><th>Field &amp; Survey</th><th>pH</th><th>Organic Carbon</th><th>N (kg/ha)</th><th>P (kg/ha)</th><th>K (kg/ha)</th></tr>
+          </thead>
+          <tbody data-bind="soil_rows">{{ soil_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 3: CULTIVATIONS, ACTIVITIES & SEASON INPUTS ==================== -->
+  <section id="ftab-cultivation" class="tab-panel">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Start New Cultivation (<code class="mono">cultivations</code>)</h2>
+        </div>
+        <form method="POST" action="/farmer/cultivation/add" data-async-form>
+          <div class="form-group">
+            <label>Farm Field *</label>
+            <select name="field_id" required data-bind-options="farmer_field_options">{{ farmer_field_options }}</select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Crop &amp; Variety *</label>
+              <select name="variety_id" required data-bind-options="variety_options">{{ variety_options }}</select>
+            </div>
+            <div class="form-group">
+              <label>Season *</label>
+              <select name="season_id" required data-bind-options="season_options">{{ season_options }}</select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Sowing Date *</label>
+              <input type="date" name="sowing_date" required value="2026-11-25">
+            </div>
+            <div class="form-group">
+              <label>Expected Harvest Date</label>
+              <input type="date" name="expected_harvest_date" value="2027-03-20">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-gold">Save Cultivation Cycle</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Log Cultivation Activity (<code class="mono">cultivation_activities</code>)</h2>
+        </div>
+        <form method="POST" action="/farmer/activity/add" data-async-form>
+          <div class="form-group">
+            <label>Cultivation Plot *</label>
+            <select name="cultivation_id" required data-bind-options="farmer_cultivation_options">{{ farmer_cultivation_options }}</select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Activity Type *</label>
+              <input type="text" name="activity_type" required placeholder="e.g. Top Dressing / Weeding">
+            </div>
+            <div class="form-group">
+              <label>Activity Date *</label>
+              <input type="date" name="activity_date" required value="2026-11-25">
+            </div>
+            <div class="form-group">
+              <label>Expense (&#8377;) *</label>
+              <input type="number" step="0.01" min="0" name="expense" required value="1500">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Operation details">
+          </div>
+          <button type="submit" class="btn btn-gold">Record Activity &amp; Expense</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">My Cultivations (<code class="mono">cultivations</code>)</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-cultivations" placeholder="Filter crop, season, field...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Season</th><th>Field</th><th>Crop &amp; Variety</th><th>Sowing</th><th>Expected Harvest</th><th data-sort="number">Activities Spend</th><th>Status</th></tr></thead>
+          <tbody id="tbody-farmer-cultivations" data-bind="cultivation_rows">{{ cultivation_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Cultivation Activities Log (<code class="mono">cultivation_activities</code>)</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-activities" placeholder="Filter activity...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th data-sort="text">Date</th><th>Field &amp; Crop</th><th>Activity</th><th>Description</th><th data-sort="number">Expense</th></tr></thead>
+          <tbody id="tbody-farmer-activities" data-bind="activity_rows">{{ activity_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Agricultural Products Applied During the Season (<code class="mono">input_applications</code>)</h2>
+          <p class="card-sub">Certified RBK fertilizers, seeds &amp; crop protection lots logged against your cultivations.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Season / Crop</th><th>Product &amp; Company</th><th>Batch Lot #</th><th>Qty Used</th><th>Method &amp; VAA Remarks</th></tr></thead>
+          <tbody data-bind="season_inputs_rows">{{ season_inputs_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 4: RBK PURCHASES, PAYMENTS & PRE-BOOKINGS ==================== -->
+  <section id="ftab-inputs" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Place New Seasonal Input Pre-Booking (<code class="mono">pre_booking_orders</code>)</h2>
+      </div>
+      <form method="POST" action="/farmer/preorder/add" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>RBK Center *</label>
+            <select name="rbk_id" required data-bind-options="rbk_options">{{ rbk_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Agricultural Product *</label>
+            <select name="product_id" required data-bind-options="product_options">{{ product_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Requested Quantity *</label>
+            <input type="number" step="1" min="1" name="requested_quantity" required value="4">
+          </div>
+          <div class="form-group">
+            <label>Target Season *</label>
+            <select name="target_season" required data-bind-options="season_name_options">{{ season_name_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Target Year *</label>
+            <input type="number" name="target_year" required value="2026">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold">Submit Pre-Booking Order to RBK</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">My Pre-Booking Orders (<code class="mono">pre_booking_orders</code> &amp; <code class="mono">pre_booking_items</code>)</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-preorders" placeholder="Search pre-order...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pre-Order #</th><th>RBK Center</th><th>Season / Year</th><th>Product</th><th data-sort="number">Requested Qty</th><th data-sort="number">Est. Value</th><th>Status</th></tr></thead>
+          <tbody id="tbody-farmer-preorders" data-bind="preorder_rows">{{ preorder_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">RBK Input Purchases &amp; Payments (<code class="mono">input_purchases</code> &amp; <code class="mono">input_payments</code>)</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-purchases" placeholder="Search purchase ID, product...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Purchase ID &amp; Date</th><th>RBK Center</th><th>Product &amp; Batch</th><th>Qty &times; Price</th><th data-sort="number">Subtotal</th><th>Payment Method &amp; Ref</th><th>Status</th></tr></thead>
+          <tbody id="tbody-farmer-purchases" data-bind="input_purchase_rows">{{ input_purchase_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 5: BUYER ORDERS PURCHASED FROM THIS FARMER ==================== -->
+  <section id="ftab-sales" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Institutional Buyer Orders for Your Produce (<code class="mono">sales_orders</code> &amp; <code class="mono">sales_payments</code>)</h2>
+          <p class="card-sub">Track buyer contracts, Escrow lock guarantees, truck dispatch status, and completed settlements.</p>
+        </div>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-sales" placeholder="Search buyer, crop, batch...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order ID &amp; Date</th><th>Buyer Organization</th><th>Crop Batch &amp; Grade</th><th>Qty &times; Price</th><th data-sort="number">Total Value</th><th>Escrow / Payment</th><th>Shipment &amp; Status</th></tr>
+          </thead>
+          <tbody id="tbody-farmer-sales" data-bind="buyer_order_rows">{{ buyer_order_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>

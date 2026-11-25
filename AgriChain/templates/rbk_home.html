@@ -1,0 +1,732 @@
+<main class="page-wrap portal-main" data-sync-endpoint="/api/rbk/state">
+  <section class="portal-banner">
+    <div>
+      <div class="badge badge-green" style="background:rgba(255,255,255,0.16);color:#fff;margin-bottom:8px;">
+        RBK Digital Operations Tablet &bull; {{ rbk_id }}
+      </div>
+      <h1>{{ rbk_name }}</h1>
+      <p>Logged in: <strong>{{ employee_name }}</strong> ({{ designation }}) &bull; District: {{ district }}</p>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:0.82rem;opacity:0.82;">Active MySQL Trigger</div>
+      <code class="mono" style="font-size:0.85rem;background:rgba(0,0,0,0.25);padding:4px 8px;border-radius:6px;">trg_after_input_purchase_item_insert</code>
+    </div>
+  </section>
+
+  <div class="live-sync-bar">
+    <div class="live-sync-status">
+      <span class="live-dot" id="live-sync-dot"></span>
+      <span>Live MySQL Sync</span>
+      <span id="live-sync-time" class="mono">Ready</span>
+    </div>
+    <div class="btn-group-inline">
+      <label style="margin:0;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;cursor:pointer;">
+        <input type="checkbox" id="live-sync-toggle" checked style="width:auto;min-height:auto;">
+        Auto-refresh (15s)
+      </label>
+      <button type="button" class="btn btn-outline btn-sm" id="live-sync-now">Sync Now</button>
+    </div>
+  </div>
+
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">RBK Stocked Batches</div>
+      <div class="kpi-value" data-bind="kpi_inv_count">{{ kpi_inv_count }}</div>
+      <div class="kpi-sub">Total units in center: <span data-bind="kpi_inv_units">{{ kpi_inv_units }}</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Pending Truck Receipts</div>
+      <div class="kpi-value" data-bind="kpi_pending_supply">{{ kpi_pending_supply }}</div>
+      <div class="kpi-sub">Awaiting dock inspection</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Pending Tenant CCRCs</div>
+      <div class="kpi-value" data-bind="kpi_pending_ccrc">{{ kpi_pending_ccrc }}</div>
+      <div class="kpi-sub">Oral leases awaiting VAA consent</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Certified Produce Lots</div>
+      <div class="kpi-value" data-bind="kpi_crop_batches">{{ kpi_crop_batches }}</div>
+      <div class="kpi-sub">QR tagged &amp; marketplace ready</div>
+    </div>
+  </section>
+
+  <nav class="nav-tabs" aria-label="RBK Workflows">
+    <button type="button" class="tab-btn active" data-tab-target="tab-register">Farmer Registration (1&rarr;2&rarr;3)</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-supply">1. Stock Receiving</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-ccrc">2. Tenant Verification (CCRC)</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-pos">3. Biometric POS &amp; Quota</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-advisory">4. Agronomic Advisory</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-quality">5. Quality &amp; Truck Dispatch</button>
+    <button type="button" class="tab-btn" data-tab-target="tab-directory">Pre-Bookings &amp; Farmers</button>
+  </nav>
+
+  <!-- ==================== TAB 0: SEQUENTIAL FARMER REGISTRATION ==================== -->
+  <section id="tab-register" class="tab-panel active">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Complete Sequential Farmer Registration</h2>
+          <p class="card-sub">Step 1 (Farmer &amp; Biometric Details) &rarr; Step 2 (Farm Land &amp; Fields) &rarr; Step 3 (Farmer KCC Credit Account), persisted dynamically to MySQL.</p>
+        </div>
+      </div>
+
+      <div class="wizard-steps">
+        <div class="wizard-step active" data-wizard-step="1">Step 1: Farmer, Address &amp; Biometric</div>
+        <div class="wizard-step" data-wizard-step="2">Step 2: Farm Land, Fields &amp; Soil</div>
+        <div class="wizard-step" data-wizard-step="3">Step 3: Farmer Credit Account (KCC)</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div data-wizard-panel="1">
+        <form method="POST" action="/rbk/farmer/step1" data-async-form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg_farmer_name">Full Name *</label>
+              <input type="text" id="reg_farmer_name" name="farmer_name" required placeholder="e.g. K. Satyanarayana">
+            </div>
+            <div class="form-group">
+              <label for="reg_phone">Mobile Phone *</label>
+              <input type="tel" id="reg_phone" name="phone" required placeholder="10-digit mobile">
+            </div>
+            <div class="form-group">
+              <label for="reg_email">Email (Optional)</label>
+              <input type="email" id="reg_email" name="email" placeholder="farmer@domain.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg_dob">Date of Birth</label>
+              <input type="date" id="reg_dob" name="dob" value="1985-06-15">
+            </div>
+            <div class="form-group">
+              <label for="reg_gender">Gender</label>
+              <select id="reg_gender" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg_pwd">Portal Password *</label>
+              <input type="password" id="reg_pwd" name="password" required value="farmer@123">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg_aadhaar">Aadhaar Number (Stored Masked) *</label>
+              <input type="text" id="reg_aadhaar" name="aadhaar_number" required placeholder="12-digit or last 4 digits">
+            </div>
+            <div class="form-group">
+              <label for="reg_bio_type">Biometric Method</label>
+              <select id="reg_bio_type" name="biometric_type">
+                <option value="Fingerprint & Iris">Fingerprint &amp; Iris</option>
+                <option value="Fingerprint">Fingerprint</option>
+                <option value="Iris Scan">Iris Scan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg_bio_status">Kiosk Verification Status</label>
+              <select id="reg_bio_status" name="biometric_status">
+                <option value="Verified">Verified</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg_division_select">Select Administrative Division (Auto-fill)</label>
+              <select id="reg_division_select" data-bind-options="division_options" data-default-option="-- Choose Village / Mandal / District --">
+                <option value="">-- Choose Village / Mandal / District --</option>
+                {{ division_options }}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg_house">Door / House Number</label>
+              <input type="text" id="reg_house" name="house_number" placeholder="e.g. 4-112/B">
+            </div>
+            <div class="form-group">
+              <label for="reg_village">Village *</label>
+              <input type="text" id="reg_village" name="village" required placeholder="Village name">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg_mandal">Mandal *</label>
+              <input type="text" id="reg_mandal" name="mandal" required placeholder="Mandal name">
+            </div>
+            <div class="form-group">
+              <label for="reg_district">District *</label>
+              <input type="text" id="reg_district" name="district" required placeholder="District">
+            </div>
+            <div class="form-group">
+              <label for="reg_state">State *</label>
+              <input type="text" id="reg_state" name="state" required value="Andhra Pradesh">
+            </div>
+            <div class="form-group">
+              <label for="reg_pincode">Pincode (6 digits) *</label>
+              <input type="text" id="reg_pincode" name="pincode" required maxlength="6" placeholder="522202">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Farmer &amp; Proceed to Step 2 (Land Details) &rarr;</button>
+        </form>
+      </div>
+
+      <!-- Step 2 -->
+      <div data-wizard-panel="2" class="hidden">
+        <form method="POST" action="/rbk/farmer/step2" data-async-form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step2_farmer_id">Select Farmer *</label>
+              <select id="step2_farmer_id" name="farmer_id" required data-bind-options="wizard_farmer_options">
+                {{ wizard_farmer_options }}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="step2_survey">Survey Number *</label>
+              <input type="text" id="step2_survey" name="survey_number" required placeholder="e.g. Sy. No. 214/A">
+            </div>
+            <div class="form-group">
+              <label for="step2_passbook">Pattadar Passbook Number *</label>
+              <input type="text" id="step2_passbook" name="passbook_number" required placeholder="e.g. AP-GNT-551200">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step2_area">Land Area (Acres) *</label>
+              <input type="number" step="0.01" min="0.1" id="step2_area" name="land_area" required placeholder="e.g. 2.00">
+            </div>
+            <div class="form-group">
+              <label for="step2_owner_type">Ownership Type *</label>
+              <select id="step2_owner_type" name="ownership_type">
+                <option value="Owned">Owned</option>
+                <option value="Joint">Joint</option>
+                <option value="Leased">Leased</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="step2_village">Land Village *</label>
+              <input type="text" id="step2_village" name="village" required placeholder="e.g. Angalakuduru">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step2_field_name">Farm Field Plot Name *</label>
+              <input type="text" id="step2_field_name" name="field_name" required placeholder="e.g. East Canal Paddy Plot">
+            </div>
+            <div class="form-group">
+              <label for="step2_field_area">Cultivable Field Area (Acres)</label>
+              <input type="number" step="0.01" min="0.1" id="step2_field_area" name="field_area" placeholder="Defaults to land area">
+            </div>
+            <div class="form-group">
+              <label for="step2_soil">Soil Type</label>
+              <input type="text" id="step2_soil" name="soil_type" value="Deep Black Alluvial">
+            </div>
+            <div class="form-group">
+              <label for="step2_irrig">Irrigation Type</label>
+              <input type="text" id="step2_irrig" name="irrigation_type" value="Canal / Borewell">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step2_ph">Optional Initial Soil pH (0-14)</label>
+              <input type="number" step="0.1" min="0" max="14" id="step2_ph" name="ph_level" placeholder="e.g. 7.1">
+            </div>
+            <div class="form-group">
+              <label for="step2_oc">Organic Carbon (%)</label>
+              <input type="number" step="0.01" id="step2_oc" name="organic_carbon" placeholder="0.65">
+            </div>
+            <div class="form-group">
+              <label for="step2_n">Nitrogen (kg/ha)</label>
+              <input type="number" step="0.1" id="step2_n" name="nitrogen_kg_ha" placeholder="250">
+            </div>
+            <div class="form-group">
+              <label for="step2_p">Phosphorus (kg/ha)</label>
+              <input type="number" step="0.1" id="step2_p" name="phosphorus_kg_ha" placeholder="22">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Land &amp; Field, Proceed to Step 3 (Credit Account) &rarr;</button>
+        </form>
+      </div>
+
+      <!-- Step 3 -->
+      <div data-wizard-panel="3" class="hidden">
+        <form method="POST" action="/rbk/farmer/step3" data-async-form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step3_farmer_id">Select Farmer *</label>
+              <select id="step3_farmer_id" name="farmer_id" required data-bind-options="wizard_farmer_options">
+                {{ wizard_farmer_options }}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="step3_bank">Credit Institution / Bank *</label>
+              <input type="text" id="step3_bank" name="institution_name" required placeholder="e.g. State Bank of India - Tenali">
+            </div>
+            <div class="form-group">
+              <label for="step3_kcc">KCC Card Number *</label>
+              <input type="text" id="step3_kcc" name="kcc_card_number" required placeholder="e.g. KCC-SBIN-778899">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="step3_limit">Total Credit Limit (&#8377;) *</label>
+              <input type="number" step="0.01" min="0" id="step3_limit" name="total_credit_limit" required value="250000">
+            </div>
+            <div class="form-group">
+              <label for="step3_avail">Available Balance (&#8377;) *</label>
+              <input type="number" step="0.01" min="0" id="step3_avail" name="available_balance" required value="250000">
+            </div>
+            <div class="form-group">
+              <label for="step3_due">Repayment Due Date</label>
+              <input type="date" id="step3_due" name="repayment_due_date" value="2027-03-31">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Complete Farmer Registration &amp; Activate KCC &#10003;</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 1: RECEIVING STOCK ==================== -->
+  <section id="tab-supply" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">1. Receiving Stock from Agro-Companies (<code class="mono">rbk_supply_orders</code> &amp; <code class="mono">rbk_inventory</code>)</h2>
+          <p class="card-sub">Inspect freight dock shipments, record accepted vs damaged bags, tap Confirm Delivery to increment <code class="mono">rbk_inventory</code> and log <code class="mono">IN</code> in <code class="mono">rbk_stock_movements</code>.</p>
+        </div>
+      </div>
+
+      <div class="table-toolbar">
+        <input type="search" class="table-search" data-filter-input="tbody-supply-orders" placeholder="Filter supply ID, company, product...">
+        <div class="filter-chips">
+          <button type="button" class="filter-chip active" data-filter-chip="tbody-supply-orders" data-filter-val="all">All</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-supply-orders" data-filter-val="Ordered">Ordered</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-supply-orders" data-filter-val="Received">Received</button>
+        </div>
+      </div>
+
+      <div class="table-wrap mb-2">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="text">Supply ID</th>
+              <th data-sort="text">Agro-Company</th>
+              <th data-sort="text">Product &amp; Batch</th>
+              <th data-sort="number">Ordered</th>
+              <th data-sort="text">Status</th>
+              <th>Dock Inspection &amp; Confirm Delivery</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-supply-orders" data-bind="supply_orders_rows">
+            {{ supply_orders_rows }}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">Raise New Agro-Company Supply Order</h3>
+      <form method="POST" action="/rbk/supply/create" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Agro-Company</label>
+            <select name="company_id" required data-bind-options="company_options">{{ company_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Product Batch</label>
+            <select name="product_batch_id" required data-bind-options="all_batch_options">{{ all_batch_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Ordered Quantity (Bags/Units)</label>
+            <input type="number" step="1" min="1" name="ordered_quantity" required value="200">
+          </div>
+          <div class="form-group">
+            <label>Expected Delivery Date</label>
+            <input type="date" name="expected_delivery_date" value="2026-11-26">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline">Create Supply Order Manifest</button>
+      </form>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Current RBK Center Inventory</h2>
+          <input type="search" class="table-search" data-filter-input="tbody-rbk-inventory" placeholder="Search stock...">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th data-sort="text">Product</th><th data-sort="text">Batch</th><th data-sort="text">Company</th><th data-sort="number">Stock</th><th data-sort="number">RBK Price</th></tr>
+            </thead>
+            <tbody id="tbody-rbk-inventory" data-bind="rbk_inventory_rows">{{ rbk_inventory_rows }}</tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">RBK Stock Movements (<code class="mono">IN</code> / <code class="mono">OUT</code>)</h2>
+          <input type="search" class="table-search" data-filter-input="tbody-stock-movements" placeholder="Filter IN / OUT...">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th data-sort="text">Date</th><th data-sort="text">Type</th><th data-sort="text">Product / Batch</th><th data-sort="number">Qty</th><th>Ref / Staff</th></tr>
+            </thead>
+            <tbody id="tbody-stock-movements" data-bind="stock_movement_rows">{{ stock_movement_rows }}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 2: TENANT FARMER VERIFICATION (CCRC) ==================== -->
+  <section id="tab-ccrc" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">2. Tenant Farmer Verification (<code class="mono">seasonal_cultivator_rights</code>)</h2>
+          <p class="card-sub">Verify oral leases with landowner OTP/biometric consent, strict 11-month CCRC expiry, and explicit non-encumbrance guarantee (<code class="mono">approval_status = 'VERIFIED_BY_VAA'</code>).</p>
+        </div>
+      </div>
+
+      <div class="table-toolbar">
+        <input type="search" class="table-search" data-filter-input="tbody-ccrc" placeholder="Search survey, village, tenant...">
+        <div class="filter-chips">
+          <button type="button" class="filter-chip active" data-filter-chip="tbody-ccrc" data-filter-val="all">All</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-ccrc" data-filter-val="Pending">Pending</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-ccrc" data-filter-val="VERIFIED_BY_VAA">Verified</button>
+        </div>
+      </div>
+
+      <div class="table-wrap mb-2">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="text">Tenure ID</th>
+              <th data-sort="text">Land Record &amp; Village</th>
+              <th data-sort="text">Landowner</th>
+              <th data-sort="text">Tenant Farmer</th>
+              <th data-sort="text">Expiry &amp; Clause</th>
+              <th>Status / VAA Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-ccrc" data-bind="ccrc_rows">{{ ccrc_rows }}</tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">New CCRC Verification at VAA Desk</h3>
+      <form method="POST" action="/rbk/ccrc/verify" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Owner Land Record (<code class="mono">farmer_land_records</code>)</label>
+            <select name="land_id" required data-bind-options="land_record_options">{{ land_record_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Tenant Farmer (<code class="mono">farmers</code>)</label>
+            <select name="tenant_farmer_id" required data-bind-options="farmer_options">{{ farmer_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Agreement Type</label>
+            <input type="text" name="agreement_type" value="11-Month CCRC Oral Lease Card" required>
+          </div>
+          <div class="form-group">
+            <label>Strict Lease Duration (Months, Max 11)</label>
+            <input type="number" min="1" max="11" name="lease_months" value="11" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" name="non_encumbrance_clause" value="1" style="width:auto;min-height:auto;" checked>
+              <span>Explicit Non-Encumbrance Clause: Landowner cannot lose land title</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" name="owner_consent" value="1" style="width:auto;min-height:auto;">
+              <span>Landowner OTP / Biometric Consent Verified in Person</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" name="decision" value="VERIFIED_BY_VAA" class="btn btn-primary">
+          Approve &amp; Issue CCRC (VERIFIED_BY_VAA)
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 3: BIOMETRIC POS & QUOTA CONTROL ==================== -->
+  <section id="tab-pos" class="tab-panel">
+    <div data-bind="pos_receipt_html">{{ pos_receipt_html }}</div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">3. Biometric Dispensing &amp; Quota Control (<code class="mono">input_purchases</code>)</h2>
+          <p class="card-sub">Thumbprint biometric verification, acreage-based scientific quota enforcement, KCC/UPI/Cash billing, and MySQL trigger auto-deduction.</p>
+        </div>
+      </div>
+
+      <form method="POST" action="/rbk/pos/dispense" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pos_farmer_id">1. Select Farmer *</label>
+            <select id="pos_farmer_id" name="farmer_id" required data-bind-options="pos_farmer_options" data-default-option="-- Choose Farmer --">
+              <option value="">-- Choose Farmer --</option>
+              {{ pos_farmer_options }}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pos_aadhaar_last4">Biometric Aadhaar Last 4 Digits (Optional Check)</label>
+            <input type="text" id="pos_aadhaar_last4" name="aadhaar_last4" maxlength="4" placeholder="e.g. 9812">
+          </div>
+          <div class="form-group">
+            <label>Biometric Kiosk Thumb Scan *</label>
+            <label style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface-alt);cursor:pointer;">
+              <input type="checkbox" name="biometric_verified" value="1" style="width:auto;min-height:auto;" checked>
+              <span>Farmer Thumbprint Verified on Kiosk</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pos_batch_id">2. Scan Barcode / Select Inventory Batch *</label>
+            <select id="pos_batch_id" name="product_batch_id" required data-bind-options="pos_inventory_options" data-default-option="-- Choose RBK Stock Batch --">
+              <option value="">-- Choose RBK Stock Batch --</option>
+              {{ pos_inventory_options }}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pos_quantity">Quantity (Bags / Bottles) *</label>
+            <input type="number" step="1" min="1" id="pos_quantity" name="quantity" required value="4">
+          </div>
+          <div class="form-group">
+            <label for="pos_payment_method">3. Payment Method *</label>
+            <select id="pos_payment_method" name="payment_method" required>
+              <option value="KCC">Kisan Credit Card (KCC - Auto Debit)</option>
+              <option value="UPI">Direct UPI / QR</option>
+              <option value="Cash">Cash at Counter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pos_kcc_id">KCC Account (if paying by KCC)</label>
+            <select id="pos_kcc_id" name="kcc_account_id" data-bind-options="kcc_options" data-default-option="Auto-select Farmer Active KCC">
+              <option value="">Auto-select Farmer Active KCC</option>
+              {{ kcc_options }}
+            </select>
+          </div>
+        </div>
+
+        <div id="pos_live_preview" class="demo-box mb-2"></div>
+
+        <button type="submit" class="btn btn-primary">Authenticate, Verify Quota &amp; Complete Sale</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Recent RBK POS Transactions</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-recent-purchases" placeholder="Search purchase ID, farmer...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-sort="text">Purchase ID</th><th data-sort="text">Date</th><th data-sort="text">Farmer</th><th>Items</th><th data-sort="number">Amount</th><th>Payment</th></tr>
+          </thead>
+          <tbody id="tbody-recent-purchases" data-bind="recent_purchase_rows">{{ recent_purchase_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 4: ON-FARM AGRONOMIC ADVISORY ==================== -->
+  <section id="tab-advisory" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">4. On-Farm Agronomic Advisory (<code class="mono">input_applications</code>)</h2>
+          <p class="card-sub">Log field pest/disease inspections and exact chemical lot numbers applied so institutional buyers can verify safe MRL compliance.</p>
+        </div>
+      </div>
+
+      <form method="POST" action="/rbk/advisory/log" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Farmer Field &amp; Cultivation Plot *</label>
+            <select name="cultivation_id" required data-bind-options="cultivation_options">{{ cultivation_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Recommended Product &amp; Exact Lot Number *</label>
+            <select name="product_batch_id" required data-bind-options="all_batch_options">{{ all_batch_options }}</select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity Applied (L / kg / packs) *</label>
+            <input type="number" step="0.01" min="0.01" name="quantity_used" required value="0.25">
+          </div>
+          <div class="form-group">
+            <label>Application Date *</label>
+            <input type="date" name="application_date" required value="2026-11-25">
+          </div>
+          <div class="form-group">
+            <label>Application Method / Dilution *</label>
+            <input type="text" name="application_method" required value="Foliar Spray (0.4 ml/liter)">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Field Inspection Findings &amp; Advisory Remarks *</label>
+          <textarea name="remarks" rows="2" required placeholder="e.g. Yellow stem borer larvae spotted in paddy; recommended Bayer Coragen at 0.4 ml/liter"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Record Agronomic Advisory in MySQL</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Logged Field Input Applications</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-advisories" placeholder="Search crop, chemical, farmer...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-sort="text">Date</th><th data-sort="text">Farmer &amp; Field</th><th data-sort="text">Crop</th><th>Product &amp; Lot</th><th>Qty / Method</th><th>Advisory Remarks</th></tr>
+          </thead>
+          <tbody id="tbody-advisories" data-bind="advisory_rows">{{ advisory_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 5: HARVEST QUALITY TESTING & DISPATCH ==================== -->
+  <section id="tab-quality" class="tab-panel">
+    <div data-bind="certified_qr_html">{{ certified_qr_html }}</div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">5. Harvest Quality Testing &amp; Produce Certification (<code class="mono">crop_quality_tests</code> &amp; <code class="mono">crop_batches</code>)</h2>
+          <p class="card-sub">Record digital grain moisture meter readings &amp; visual grade, print serialized QR stickers, and list batch as <code class="mono">READY_FOR_SALE</code>.</p>
+        </div>
+      </div>
+
+      <form method="POST" action="/rbk/quality/certify" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Harvested / Ready Cultivation *</label>
+            <select name="cultivation_id" required data-bind-options="cultivation_options">{{ cultivation_options }}</select>
+          </div>
+          <div class="form-group">
+            <label>Harvest Date *</label>
+            <input type="date" name="harvest_date" required value="2026-11-25">
+          </div>
+          <div class="form-group">
+            <label>Net Harvest Weight (kg) *</label>
+            <input type="number" step="1" min="1" name="total_quantity" required value="2500">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Digital Moisture Meter Reading (%) *</label>
+            <input type="number" step="0.1" min="0" max="100" name="moisture_percentage" required value="10.2">
+          </div>
+          <div class="form-group">
+            <label>Visual Quality Grade *</label>
+            <select name="quality_grade" required>
+              <option value="GRADE_A">GRADE_A (Uniform color, zero fungal spots)</option>
+              <option value="Grade A+">Grade A+ (Export Super Premium)</option>
+              <option value="Grade B">Grade B (Standard Milling Grade)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Certification Result *</label>
+            <select name="test_result" required>
+              <option value="Passed">Passed &rarr; List READY_FOR_SALE</option>
+              <option value="Failed">Failed &rarr; Hold for Drying</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Storage Warehouse / Godown *</label>
+            <select name="warehouse_id" required data-bind-options="warehouse_options">{{ warehouse_options }}</select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Inspector Notes</label>
+          <input type="text" name="remarks" value="Digital probe 3 random sacks: safe storage moisture, uniform luster">
+        </div>
+        <button type="submit" class="btn btn-primary">Certify Batch &amp; Print Thermal QR Stickers</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Truck Loading &amp; Buyer Order Dispatch (<code class="mono">shipments</code>)</h2>
+          <p class="card-sub">Scan batch QR codes while loading onto buyer transport trucks (<code class="mono">READY_FOR_SALE</code> &rarr; <code class="mono">IN_TRANSIT</code>).</p>
+        </div>
+      </div>
+      <div class="table-wrap mb-2">
+        <table>
+          <thead>
+            <tr><th>Order ID</th><th>Buyer &amp; Crop Batch</th><th>Qty (kg)</th><th>Status</th><th>Truck Dispatch Form</th></tr>
+          </thead>
+          <tbody data-bind="pending_dispatch_rows">{{ pending_dispatch_rows }}</tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">Certified Crop Batches &amp; Thermal QR Labels</h3>
+      <div class="grid-3" data-bind="crop_batch_cards">{{ crop_batch_cards }}</div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 6: PRE-BOOKINGS & FARMERS DIRECTORY ==================== -->
+  <section id="tab-directory" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Farmer Seasonal Pre-Bookings at {{ rbk_name }}</h2>
+        <div class="filter-chips">
+          <button type="button" class="filter-chip active" data-filter-chip="tbody-rbk-preorders" data-filter-val="all">All</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-rbk-preorders" data-filter-val="Pending">Pending</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-rbk-preorders" data-filter-val="Confirmed">Confirmed</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-rbk-preorders" data-filter-val="Fulfilled">Fulfilled</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-sort="text">Pre-Order #</th><th data-sort="text">Farmer</th><th data-sort="text">Season</th><th>Requested Items</th><th data-sort="text">Status</th><th>Update</th></tr>
+          </thead>
+          <tbody id="tbody-rbk-preorders" data-bind="preorder_rows">{{ preorder_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Registered Farmers &amp; Verified Entitlements</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-farmer-dir" placeholder="Search farmer ID, name, village, phone...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-sort="text">Farmer ID</th><th data-sort="text">Name &amp; Village</th><th>Phone</th><th data-sort="text">Biometric</th><th data-sort="number">Verified Acres</th><th data-sort="number">KCC Available</th></tr>
+          </thead>
+          <tbody id="tbody-farmer-dir" data-bind="farmer_directory_rows">{{ farmer_directory_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>

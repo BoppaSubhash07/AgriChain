@@ -1,0 +1,258 @@
+<main class="page-wrap portal-main" data-sync-endpoint="/api/buyer/state">
+  <section class="portal-banner buyer-theme">
+    <div>
+      <div class="badge badge-blue" style="background:rgba(255,255,255,0.18);color:#fff;margin-bottom:8px;">
+        Institutional Buyer Portal ({{ buyer_type }}) &bull; {{ buyer_id }}
+      </div>
+      <h1>{{ buyer_name }}</h1>
+      <p>Reg / GST: <strong>{{ registration_number }}</strong> &bull; Email: {{ email }}</p>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:0.82rem;opacity:0.84;">Total Contract Volume</div>
+      <div style="font-size:1.5rem;font-weight:600;">&#8377;<span data-bind="kpi_order_value">{{ kpi_order_value }}</span></div>
+    </div>
+  </section>
+
+  <div class="live-sync-bar">
+    <div class="live-sync-status">
+      <span class="live-dot" id="live-sync-dot"></span>
+      <span>Live MySQL Sync</span>
+      <span id="live-sync-time" class="mono">Ready</span>
+    </div>
+    <div class="btn-group-inline">
+      <label style="margin:0;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;cursor:pointer;">
+        <input type="checkbox" id="live-sync-toggle" checked style="width:auto;min-height:auto;">
+        Auto-refresh (15s)
+      </label>
+      <button type="button" class="btn btn-outline btn-sm" id="live-sync-now">Sync Now</button>
+    </div>
+  </div>
+
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Available Verified Lots</div>
+      <div class="kpi-value" data-bind="kpi_market_lots">{{ kpi_market_lots }}</div>
+      <div class="kpi-sub"><span data-bind="kpi_market_kg">{{ kpi_market_kg }}</span> kg ready for procurement</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Purchase Contracts</div>
+      <div class="kpi-value" data-bind="kpi_orders_count">{{ kpi_orders_count }}</div>
+      <div class="kpi-sub">Tracked in <code class="mono">sales_orders</code></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Orders In Escrow / Transit</div>
+      <div class="kpi-value" data-bind="kpi_escrow_count">{{ kpi_escrow_count }}</div>
+      <div class="kpi-sub">Protected until verified delivery</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Verified Storage Godowns</div>
+      <div class="kpi-value" data-bind="kpi_warehouse_count">{{ kpi_warehouse_count }}</div>
+      <div class="kpi-sub">Cold storage &amp; dry grain godowns</div>
+    </div>
+  </section>
+
+  <div data-bind="settlement_banner_html">{{ settlement_banner_html }}</div>
+
+  <nav class="nav-tabs" aria-label="Buyer Workflows">
+    <button type="button" class="tab-btn active" data-tab-target="btab-market">Certified Crop Marketplace &amp; Ordering</button>
+    <button type="button" class="tab-btn" data-tab-target="btab-passport">QR Agronomic Passport Inspector</button>
+    <button type="button" class="tab-btn" data-tab-target="btab-logistics">Escrow Orders, Trucks &amp; Settlements</button>
+    <button type="button" class="tab-btn" data-tab-target="btab-profile">Buyer Entity, Warehouses &amp; Categories</button>
+  </nav>
+
+  <!-- ==================== TAB 1: MARKETPLACE & ORDERING ==================== -->
+  <section id="btab-market" class="tab-panel active">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Live Verified Produce Marketplace (<code class="mono">crop_batches</code> READY_FOR_SALE)</h2>
+          <p class="card-sub">Every batch carries VAA digital moisture testing, QR agronomic audit, and storage warehouse proof.</p>
+        </div>
+      </div>
+
+      <div class="table-toolbar">
+        <div class="filter-chips" style="flex-wrap:wrap;">
+          <input type="search" class="table-search" data-filter-input="tbody-buyer-market" placeholder="Search crop, variety, farmer, lot ID...">
+          <button type="button" class="filter-chip active" data-filter-chip="tbody-buyer-market" data-filter-attr="data-grade" data-filter-val="all">All Grades</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-market" data-filter-attr="data-grade" data-filter-val="Grade A+">Grade A+</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-market" data-filter-attr="data-grade" data-filter-val="GRADE_A">GRADE_A</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-market" data-filter-attr="data-grade" data-filter-val="Grade B">Grade B</button>
+        </div>
+        <div class="btn-group-inline">
+          <label for="buyer-max-moisture" style="margin:0;font-size:0.8rem;color:var(--p-muted);white-space:nowrap;">Max Moisture %</label>
+          <input type="number" id="buyer-max-moisture" step="0.5" min="5" max="30" placeholder="e.g. 12.5" style="width:105px;min-height:36px;padding:6px 10px;font-size:0.84rem;">
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="text">Batch Lot &amp; QR</th>
+              <th data-sort="text">Crop &amp; Farmer Origin</th>
+              <th data-sort="text">Moisture &amp; Grade</th>
+              <th>Storage Warehouse</th>
+              <th data-sort="number">Available Stock</th>
+              <th data-sort="text">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-buyer-market" data-bind="marketplace_rows">{{ marketplace_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" id="buyer-order-form-card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Place Direct Purchase Order &amp; Lock Escrow (<code class="mono">sales_orders</code> + <code class="mono">sales_payments</code>)</h2>
+          <p class="card-sub">Select a certified crop batch or click "Order This Batch" above to pre-fill and lock funds in escrow.</p>
+        </div>
+      </div>
+      <form method="POST" action="/buyer/order/create" data-async-form>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="order_crop_batch_id">Certified Crop Batch *</label>
+            <select id="order_crop_batch_id" name="crop_batch_id" required data-bind-options="order_batch_options" data-default-option="-- Select Certified Crop Batch --">
+              <option value="">-- Select Certified Crop Batch --</option>
+              {{ order_batch_options }}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="order_quantity">Order Quantity (kg) *</label>
+            <input type="number" step="1" min="1" id="order_quantity" name="order_quantity" required placeholder="e.g. 1500">
+          </div>
+          <div class="form-group">
+            <label for="order_unit_price">Contract Unit Price (&#8377;/kg) *</label>
+            <input type="number" step="0.01" min="1" id="order_unit_price" name="unit_price" required placeholder="e.g. 24.50">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="order_delivery_address">Buyer Unloading Port / Warehouse Address *</label>
+            <input type="text" id="order_delivery_address" name="delivery_address" required value="{{ default_buyer_address }}">
+          </div>
+          <div class="form-group">
+            <label for="order_shipping_method">Transport &amp; Logistics Mode</label>
+            <select id="order_shipping_method" name="shipping_method">
+              <option value="Refrigerated Grain Container">Refrigerated Grain Container</option>
+              <option value="Insulated Bulk Lorry">Insulated Bulk Lorry</option>
+              <option value="Export Container Trailer">Export Container Trailer</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="buyer_order_preview" class="demo-box mb-2"></div>
+
+        <button type="submit" class="btn btn-blue">Create Sales Order &amp; Lock Escrow Payment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 2: QR AGRONOMIC PASSPORT ==================== -->
+  <section id="btab-passport" class="tab-panel">
+    <div class="card no-print">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Scan / Inspect QR Crop Batch Agronomic Passport</h2>
+          <p class="card-sub">Full farm-to-fork audit: RBK inputs applied, VAA soil pH/NPK readings, grower identity, and moisture certificate.</p>
+        </div>
+      </div>
+      <form id="buyer-passport-form" method="GET" action="/buyer" data-passport-lookup-form class="form-row" style="align-items:end;">
+        <input type="hidden" name="tab" value="btab-passport">
+        <div class="form-group" style="grid-column:span 2;margin:0;">
+          <label for="passport_code_select">Select Crop Batch or QR Code *</label>
+          <select id="passport_code_select" name="code" data-bind-options="passport_options" data-default-option="-- Choose Certified Batch --">
+            <option value="">-- Choose Certified Batch --</option>
+            {{ passport_options }}
+          </select>
+        </div>
+        <div class="form-group" style="margin:0;">
+          <button type="submit" class="btn btn-primary">Load Full Audit Report</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="buyer-passport-container" data-bind="passport_html">
+      {{ passport_html }}
+    </div>
+  </section>
+
+  <!-- ==================== TAB 3: ESCROW ORDERS, TRUCKS & SETTLEMENTS ==================== -->
+  <section id="btab-logistics" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Buyer Contracts, Escrow &amp; KCC Auto-Settlement (<code class="mono">sales_orders</code> + <code class="mono">sales_payments</code>)</h2>
+          <p class="card-sub">Track contract progress from <code class="mono">PENDING</code> &rarr; <code class="mono">IN_TRANSIT</code> &rarr; <code class="mono">COMPLETED</code>. Final delivery settlement offsets the grower's active KCC debt automatically.</p>
+        </div>
+      </div>
+
+      <div class="table-toolbar">
+        <input type="search" class="table-search" data-filter-input="tbody-buyer-orders" placeholder="Search order ID, farmer, crop...">
+        <div class="filter-chips">
+          <button type="button" class="filter-chip active" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="all">All Orders</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="PENDING">Pending</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="CONFIRMED">Confirmed</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="IN_TRANSIT">In Transit</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="DELIVERED">Delivered</button>
+          <button type="button" class="filter-chip" data-filter-chip="tbody-buyer-orders" data-filter-attr="data-order-status" data-filter-val="COMPLETED">Completed</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="text">Order ID &amp; Date</th>
+              <th data-sort="text">Farmer &amp; Crop Batch</th>
+              <th data-sort="number">Qty &times; Price</th>
+              <th data-sort="number">Total Escrow</th>
+              <th data-sort="text">Shipment &amp; Lifecycle</th>
+              <th>Delivery &amp; Settlement Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-buyer-orders" data-bind="buyer_orders_rows">{{ buyer_orders_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 4: BUYER PROFILE, WAREHOUSES & CATEGORIES ==================== -->
+  <section id="btab-profile" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Institutional Buyer Organization (<code class="mono">buyers</code> &amp; <code class="mono">buyer_addresses</code>)</h2>
+      </div>
+      <div data-bind="buyer_profile_html">{{ buyer_profile_html }}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Verified AgriChain Storage Godowns (<code class="mono">warehouses</code>)</h2>
+        <input type="search" class="table-search" data-filter-input="tbody-buyer-warehouses" placeholder="Search warehouse, location, type...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-sort="text">Warehouse ID</th><th data-sort="text">Name</th><th data-sort="text">Location</th><th data-sort="text">Storage Type</th><th data-sort="number">Total Capacity (t)</th><th>Manager Phone</th></tr>
+          </thead>
+          <tbody id="tbody-buyer-warehouses" data-bind="warehouse_rows">{{ warehouse_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Registered Crop Categories (<code class="mono">crop_categories</code>)</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Category ID</th><th>Crop Group Name</th><th>Classification Description</th></tr>
+          </thead>
+          <tbody data-bind="crop_category_rows">{{ crop_category_rows }}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>

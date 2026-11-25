@@ -1,0 +1,61 @@
+<main class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-top">
+      <a href="/" class="auth-back">&larr; Switch Role</a>
+      <span class="badge badge-green">RBK Staff Portal</span>
+    </div>
+    <h1 class="auth-title">RBK Employee Sign In</h1>
+    <p class="auth-sub">Access your assigned Rythu Bharosa Kendra operations tablet.</p>
+
+    {{ error_html }}
+
+    <form method="POST" action="/login/rbk" autocomplete="off">
+      <div class="form-group">
+        <label for="rbk_identifier">Username / Email ID</label>
+        <input type="text" id="rbk_identifier" name="identifier" required
+               placeholder="e.g. officer.tenali@agrichain.gov.in or EMP-001"
+               value="{{ prev_identifier }}">
+      </div>
+
+      <div class="form-group">
+        <label for="rbk_password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="rbk_password" name="password" required
+                 placeholder="Enter your RBK employee password">
+          <button type="button" class="eye-toggle-btn" data-eye-toggle="rbk_password" aria-label="Show password">
+            <svg class="eye-svg" viewBox="0 0 32 24" aria-hidden="true">
+              <path class="eye-outline" d="M2 12 C7 4, 25 4, 30 12 C25 20, 7 20, 2 12 Z"/>
+              <circle class="eye-iris" cx="16" cy="12" r="5"/>
+              <circle class="eye-pupil" cx="16" cy="12" r="2.4"/>
+              <path class="eye-lid-upper" d="M2 12 C7 19, 25 19, 30 12"/>
+              <g class="eye-lashes">
+                <line x1="9" y1="16.5" x2="7.5" y2="19.5"/>
+                <line x1="16" y1="17.5" x2="16" y2="20.8"/>
+                <line x1="23" y1="16.5" x2="24.5" y2="19.5"/>
+              </g>
+              <line class="eye-slash" x1="5" y1="20" x2="27" y2="4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Sign In to RBK Home &rarr;</button>
+    </form>
+
+    <div class="demo-box">
+      <div class="demo-box-title">Quick-Fill Verified RBK Accounts (Password: <code class="mono">rbk@123</code>)</div>
+      <button type="button" class="demo-chip"
+              data-fill-target="rbk_identifier=officer.tenali@agrichain.gov.in|rbk_password=rbk@123">
+        AEO Tenali (EMP-001)
+      </button>
+      <button type="button" class="demo-chip"
+              data-fill-target="rbk_identifier=anitha.p@agrichain.gov.in|rbk_password=rbk@123">
+        VAA P. Anitha (EMP-002)
+      </button>
+      <button type="button" class="demo-chip"
+              data-fill-target="rbk_identifier=madhava.custodian@agrichain.gov.in|rbk_password=rbk@123">
+        Custodian (EMP-011)
+      </button>
+    </div>
+  </div>
+</main>

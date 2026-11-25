@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run AgriChain Web App",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/AgriChain/app.py",
+            "cwd": "${workspaceFolder}/AgriChain",
+            "python": "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+            "console": "integratedTerminal"
+        }
+    ]
+}

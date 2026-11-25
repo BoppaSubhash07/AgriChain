@@ -1,0 +1,71 @@
+<main class="auth-shell">
+  <div class="auth-card wide">
+    <div class="auth-top">
+      <span class="badge badge-gold">First-Time Database Connection</span>
+      <span class="badge badge-green">MySQL 8+</span>
+    </div>
+    <h1 class="auth-title">Connect MySQL &amp; Initialize AgriChain</h1>
+    <p class="auth-sub">
+      Enter your local MySQL credentials below. AgriChain will save them, apply the database triggers &amp; seed data automatically, and launch the Role Portal.
+    </p>
+
+    {{ error_html }}
+
+    <form method="POST" action="/setup" autocomplete="off">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="db_host">MySQL Host</label>
+          <input type="text" id="db_host" name="db_host" required value="{{ db_host }}">
+        </div>
+        <div class="form-group">
+          <label for="db_port">Port</label>
+          <input type="number" id="db_port" name="db_port" required value="{{ db_port }}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="db_user">MySQL Username</label>
+          <input type="text" id="db_user" name="db_user" required value="{{ db_user }}">
+        </div>
+        <div class="form-group">
+          <label for="db_name">Database Name</label>
+          <input type="text" id="db_name" name="db_name" required value="{{ db_name }}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="db_password">MySQL Password</label>
+        <div class="password-wrap">
+          <input type="password" id="db_password" name="db_password"
+                 placeholder="Enter your MySQL root password (leave blank if none)">
+          <button type="button" class="eye-toggle-btn" data-eye-toggle="db_password" aria-label="Show password">
+            <svg class="eye-svg" viewBox="0 0 32 24" aria-hidden="true">
+              <path class="eye-outline" d="M2 12 C7 4, 25 4, 30 12 C25 20, 7 20, 2 12 Z"/>
+              <circle class="eye-iris" cx="16" cy="12" r="5"/>
+              <circle class="eye-pupil" cx="16" cy="12" r="2.4"/>
+              <path class="eye-lid-upper" d="M2 12 C7 19, 25 19, 30 12"/>
+              <g class="eye-lashes">
+                <line x1="9" y1="16.5" x2="7.5" y2="19.5"/>
+                <line x1="16" y1="17.5" x2="16" y2="20.8"/>
+                <line x1="23" y1="16.5" x2="24.5" y2="19.5"/>
+              </g>
+              <line class="eye-slash" x1="5" y1="20" x2="27" y2="4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">
+        Connect, Initialize MySQL Tables &amp; Open Portal &rarr;
+      </button>
+    </form>
+
+    <div class="demo-box">
+      <div class="demo-box-title">What this button does automatically:</div>
+      <div>1. Connects to MySQL and saves <code class="mono">.env</code> cleanly.<br>
+           2. Creates/upgrades <code class="mono">agri_management_database</code>, installs <code class="mono">trg_after_input_purchase_item_insert</code>, and loads all master tables.<br>
+           3. Opens the Role Selection page (RBK Employee / Farmer / Buyer).</div>
+    </div>
+  </div>
+</main>

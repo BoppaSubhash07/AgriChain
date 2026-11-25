@@ -1,0 +1,1860 @@
+{
+ "start": "2026-11-25T15:28:51.308Z",
+ "round": 1,
+ "idle": 0,
+ "errors": 0,
+ "status": "fail",
+ "history": [
+  {
+   "at": "2026-11-25T16:58:19.899Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 47,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-25T18:44:16.258Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 47,
+   "round": 1,
+   "reused": true,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": null,
+  "dir": "/Users/subhashboppa/Library/Mobile Documents/com~apple~CloudDocs/DBMS",
+  "kind": "software",
+  "start": "2026-11-25T15:28:51.308Z",
+  "by": "start.mjs",
+  "url": "http://127.0.0.1:5219/",
+  "category": "agricultural supply chain platform",
+  "primary": "Open portal"
+ },
+ "manual": true,
+ "roundKey": "1f36b46bb8d00b5d:da39a3ee",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "1f36b46bb8d00b5d",
+ "page": "http://127.0.0.1:5219/",
+ "found": {
+  "fails": [
+   {
+    "check": "assets",
+    "where": "(the page)",
+    "msg": "the stylesheet static/assets/system.css did not load (404): everything here was measured without it",
+    "fix": "fix the path, or remove the reference",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "assets"
+    ],
+    "wheres": [
+     "(the page)"
+    ]
+   },
+   {
+    "check": "nav",
+    "where": "(the first screen)",
+    "msg": "no nav bar across the top of the first screen (a header with the brand, the section links and the main action)",
+    "fix": "make the nav one bar from the content's left edge to its right edge, with every link and action inside it",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "nav"
+    ],
+    "wheres": [
+     "(the first screen)"
+    ]
+   },
+   {
+    "check": "no-visual",
+    "where": "section#portals \"Choose your AgriChain portal\"",
+    "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "no-visual"
+    ],
+    "wheres": [
+     "section#portals \"Choose your AgriChain portal\""
+    ]
+   },
+   {
+    "check": "text-only",
+    "where": "section#faq \"Common questions\"",
+    "msg": "the closing section is only text: no picture, icon, mock or effect in it",
+    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "text-only"
+    ],
+    "wheres": [
+     "section#faq \"Common questions\""
+    ]
+   },
+   {
+    "check": "cta",
+    "where": "main#top > section.hero.hero--split",
+    "msg": "the hero has no button (the nav's does not count)",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "cta"
+    ],
+    "wheres": [
+     "main#top > section.hero.hero--split"
+    ]
+   },
+   {
+    "check": "cta",
+    "where": "section#faq \"Common questions\"",
+    "msg": "the last section before the footer ends with no button",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "cta"
+    ],
+    "wheres": [
+     "section#faq \"Common questions\""
+    ]
+   },
+   {
+    "check": "copy-fact",
+    "where": "h1#hero-h \"Digital agriculture ledger for village R\"",
+    "msg": "the first screen holds no number, price, date, place, platform or genre",
+    "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "copy-fact"
+    ],
+    "wheres": [
+     "h1#hero-h \"Digital agriculture ledger for village R\""
+    ]
+   },
+   {
+    "check": "copy-headings",
+    "where": "h2#workflows-h \"Three field workflows. Stock receiving t\"",
+    "msg": "\"Three field workflows. Stock receiving to KCC credit offset.\" names no product, part, place or section (14 headings like it; at most one brand line per page) (and 13 more like it: \"Accountability across ev\", \"Tracks every stock movem\", \"Enforces per-acre quota \", \"Clears KCC debt before D\", ...)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "copy-headings"
+    ],
+    "wheres": [
+     "h2#workflows-h \"Three field workflows. Stock receiving t\""
+    ]
+   },
+   {
+    "check": "heading-scale",
+    "where": "h2#faq-h \"Common questions\"",
+    "msg": "an h2 at 46.1px, as large as the h1 (32px) or larger",
+    "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "heading-scale"
+    ],
+    "wheres": [
+     "h2#faq-h \"Common questions\""
+    ]
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#portals / section#faq",
+    "msg": "38px between these sections, +90% against the median 20px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-gaps"
+    ],
+    "wheres": [
+     "section#portals / section#faq"
+    ]
+   },
+   {
+    "check": "hole",
+    "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+    "msg": "an empty hole 576x1128px inside the section (125% of the screen's height), with content above and below it",
+    "fix": "close the empty space: move the content together, or give the space the visual it lacks",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "hole"
+    ],
+    "wheres": [
+     "section#workflows \"Three field workflows. Stock receiving t\""
+    ]
+   },
+   {
+    "check": "effect-kind",
+    "where": "section#workflows",
+    "msg": "2 [data-moment] marks that never run: pinned-chapters on section#workflows (moments.js never mounted it); liquid-type on section#faq > div.wrap > div.section-head (moments.js never mounted it); a moment is judged as one only when it runs",
+    "fix": "load assets/moments/moments.js (system.js does it for a page with [data-moment]) and keep the dealt id, or take the data-moment mark off the section",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "effect-kind"
+    ],
+    "wheres": [
+     "section#workflows"
+    ]
+   },
+   {
+    "check": "section-tile",
+    "where": "section#portals \"Choose your AgriChain portal\"",
+    "msg": "the section is 661px tall (0.73 screens at 1440x900), shorter than the screen: its tile (the screen from its top) shows 661px of it and 201px of the next section, its heading \"Common questions\" on screen",
+    "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-tile"
+    ],
+    "wheres": [
+     "section#portals \"Choose your AgriChain portal\""
+    ]
+   },
+   {
+    "check": "empty-area",
+    "where": "section#portals \"Choose your AgriChain portal\"",
+    "msg": "60% of the section is empty: 61% beside content that covers under half the container, in its 661px of rows (WARN over 35%, FAIL over 50%)",
+    "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "empty-area"
+    ],
+    "wheres": [
+     "section#portals \"Choose your AgriChain portal\""
+    ]
+   },
+   {
+    "check": "hero-screen",
+    "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+    "msg": "the hero ends at 6729px on a 900px screen, 5829px below the fold: it ends at the fold, 1px either way (SR-1)",
+    "fix": "make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "hero-screen"
+    ],
+    "wheres": [
+     "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+    ]
+   },
+   {
+    "check": "section-height",
+    "where": "section#traceability \"Accountability across every RBK desk Tra\"",
+    "msg": "the section is 2438px tall (2.7 screens), 638px over two screens (1800px): every section after the hero is one screen or two, 2px either way (SR-2)",
+    "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-height",
+     "screen-height"
+    ],
+    "wheres": [
+     "section#traceability \"Accountability across every RBK desk Tra\"",
+     "#traceability section.section.g2 \"Accountability across every RBK \""
+    ]
+   },
+   {
+    "check": "section-height",
+    "where": "section#faq \"Common questions How does AgriChain prev\"",
+    "msg": "the section is 383px tall (0.4 screens), 517px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)",
+    "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-height",
+     "screen-short",
+     "screen-height"
+    ],
+    "wheres": [
+     "section#faq \"Common questions How does AgriChain prev\"",
+     "#faq section.section.bg-mist \"Common questions How does AgriCh\""
+    ]
+   },
+   {
+    "check": "section-height",
+    "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+    "msg": "the section is 1486px tall (1.7 screens), 315px short of two screens (1800px): every section after the hero is one screen or two, 2px either way (and 2 more like it: \"Choose your AgriChain po\", \"Open your AgriChain port\") (SR-2)",
+    "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-height",
+     "screen-height"
+    ],
+    "wheres": [
+     "section#workflows \"Three field workflows. Stock receiving t\"",
+     "#workflows section.section.bg-dots \"Three field workflows. Stock rec\""
+    ]
+   },
+   {
+    "check": "section-air",
+    "where": "section#workflows / section#traceability",
+    "msg": "20px of air between the content of these two sections: 128-480px (64-600px WARN) (every gap out of the band at 1440px, top to bottom: 20px after \"Three field workflow\", 20px after \"Accountability acros\", 38px after \"Choose your AgriChai\") (SR-3)",
+    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-air"
+    ],
+    "wheres": [
+     "section#workflows / section#traceability"
+    ]
+   },
+   {
+    "check": "section-air",
+    "where": "section#traceability / section#portals",
+    "msg": "20px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-air"
+    ],
+    "wheres": [
+     "section#traceability / section#portals"
+    ]
+   },
+   {
+    "check": "section-air",
+    "where": "section#portals / section#faq",
+    "msg": "38px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-air"
+    ],
+    "wheres": [
+     "section#portals / section#faq"
+    ]
+   },
+   {
+    "check": "one-section",
+    "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+    "msg": "the screen at scroll 6300px (stride 7) shows 429px of section 1 and the content of 2 sections, over 24px each beside section 2: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+    "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "one-section"
+    ],
+    "wheres": [
+     "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+    ]
+   },
+   {
+    "check": "one-section",
+    "where": "h2#faq-h \"Common questions\"",
+    "msg": "the screen at scroll 10800px (stride 12) shows 288px of section 5 and the heading of section 5 whole and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+    "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "one-section"
+    ],
+    "wheres": [
+     "h2#faq-h \"Common questions\""
+    ]
+   },
+   {
+    "check": "one-heading",
+    "where": "h2#faq-h \"Common questions\"",
+    "msg": "headings of two sections show whole on one screen at 13 of 255 scroll positions (5.1%; at scroll 10600, 10650, 10700, 10950px), here with \"Choose your AgriChain portal\": at most 3% on a desktop (SR-5)",
+    "fix": "make the sections one screen tall so their headings sit a screen apart and two never share one",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "one-heading"
+    ],
+    "wheres": [
+     "h2#faq-h \"Common questions\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "header.nav.nav--centre \"Skip to content AgriChain Portals Role P\"",
+    "msg": "the nav's content runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+    "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "header.nav.nav--centre \"Skip to content AgriChain Portals Role P\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+    "msg": "the content of section 1 runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+    "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+    "msg": "the content of section 2 runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (and 4 more like it: \"Accountability across ev\", \"Choose your AgriChain po\", \"Common questions How doe\") (SR-6)",
+    "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "section#workflows \"Three field workflows. Stock receiving t\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "div.hero-copy.span-5 > dl.hero-facts > div:nth-of-type(1) > dd \"RBK, Farmer, Buyer\"",
+    "msg": "12 text blocks start on a left line at x 48, 40px from the container's left: text starts on the container's left, or on one split line (x 611, 732, 853) (also \"2.0 bags/acre\", \"26 centers\", \"1. Receive stock and verify CCRC\") (SR-6)",
+    "fix": "start the text on the container's left, or on the one split line every split shares",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "div.hero-copy.span-5 > dl.hero-facts > div:nth-of-type(1) > dd \"RBK, Farmer, Buyer\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__ico > svg.ui-icon",
+    "msg": "a <svg> over half the container wide runs 48-1432px, not on the container's lines at 8-1432px (SR-6)",
+    "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__ico > svg.ui-icon"
+    ]
+   },
+   {
+    "check": "flush",
+    "where": "div.at-over > div.ui.ui-panel > div.ui-cursor__foot > button.ui-btn.ui-cursor__go \"Verify and dispense\"",
+    "msg": "its button sits 0px above the lower edge of section.hero.hero--split, where the ground changes to section#workflows",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "flush"
+    ],
+    "wheres": [
+     "div.at-over > div.ui.ui-panel > div.ui-cursor__foot > button.ui-btn.ui-cursor__go \"Verify and dispense\""
+    ]
+   },
+   {
+    "check": "tap-size",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(2) > a.nav__link \"Workflows\"",
+    "msg": "a 70x18px tap target (and 2 more like it on this screen): 0px from the next one (\"Database setupMySQL host\"), so a thumb lands on the wrong one",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency",
+    "ids": [
+     "tap-size"
+    ],
+    "wheres": [
+     "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(2) > a.nav__link \"Workflows\""
+    ]
+   },
+   {
+    "check": "tap-size",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Open portal\"",
+    "msg": "a 76x18px tap target: 0px from the next one (\"Questions\"), so a thumb lands on the wrong one",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency",
+    "ids": [
+     "tap-size"
+    ],
+    "wheres": [
+     "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Open portal\""
+    ]
+   },
+   {
+    "check": "tap-size",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "a 34x27px tap target: 0px from the next one (\"Sign in\"), so a thumb lands on the wrong one",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency",
+    "ids": [
+     "tap-size"
+    ],
+    "wheres": [
+     "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle"
+    ]
+   },
+   {
+    "check": "tap-size",
+    "where": "div.span-3.start-7 > ul > li:nth-of-type(1) > a \"RBK Employee\"",
+    "msg": "a 102x18px tap target (and 5 more like it on this screen): 0px from the next one (\"Farmer\"), so a thumb lands on the wrong one",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency",
+    "ids": [
+     "tap-size"
+    ],
+    "wheres": [
+     "div.span-3.start-7 > ul > li:nth-of-type(1) > a \"RBK Employee\""
+    ]
+   },
+   {
+    "check": "fold-cut",
+    "where": "h1#hero-h \"Digital agriculture ledger for village R\"",
+    "msg": "a 32px line is sliced by the bottom of the first screen (32px of it below the fold)",
+    "fix": "size the hero so the heading ends above the fold, or starts below it",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "fold-cut"
+    ],
+    "wheres": [
+     "h1#hero-h \"Digital agriculture ledger for village R\""
+    ]
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#workflows / section#traceability",
+    "msg": "36px between these sections, +80% against the median 20px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-gaps"
+    ],
+    "wheres": [
+     "section#workflows / section#traceability"
+    ]
+   },
+   {
+    "check": "section-tile",
+    "where": "footer#contact \"Open your AgriChain portal\"",
+    "msg": "the section is 793px tall (0.94 screens at 390x844), shorter than the screen: its tile, held at the page's end (scroll 6996px) shows 793px of it and 24px of the section above (\"Common questions\"), its text \"Portal forms submit asynchrono\" on screen",
+    "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-tile"
+    ],
+    "wheres": [
+     "footer#contact \"Open your AgriChain portal\""
+    ]
+   },
+   {
+    "check": "menu-toggle",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle \"Menu\"",
+    "msg": "the menu button keeps aria-expanded=\"false\" after a click: its state never changes (system.js flips it on .nav__toggle)",
+    "fix": "use the starter's button: <button class=\"nav__toggle\" type=\"button\" aria-expanded=\"false\" aria-label=\"Menu\">; system.js flips it",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "menu-toggle"
+    ],
+    "wheres": [
+     "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle \"Menu\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "nav logo",
+    "msg": "at x 108.5, the page's left line is 8",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "nav logo"
+    ]
+   },
+   {
+    "check": "edge-right",
+    "where": "nav actions",
+    "msg": "end at x 133.8, the page's right line is 1432",
+    "fix": "end it on the .wrap right line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-right"
+    ],
+    "wheres": [
+     "nav actions"
+    ]
+   },
+   {
+    "check": "neighbour",
+    "where": "#workflows section.section.bg-dots \"Three field workflows. Stock rec\"",
+    "msg": "framed, 247px of #traceability section.section.g2 \"Accountability across every RBK \" shows",
+    "fix": "keep the next section's heading and picture out of this screen",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "neighbour"
+    ],
+    "wheres": [
+     "#workflows section.section.bg-dots \"Three field workflows. Stock rec\""
+    ]
+   },
+   {
+    "check": "screen-short",
+    "where": "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\"",
+    "msg": "661px tall; one screen under the nav is 900px",
+    "fix": "make the section one full screen (--h: 1, layout-v4.md section 2)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "screen-short",
+     "screen-height"
+    ],
+    "wheres": [
+     "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\""
+    ]
+   },
+   {
+    "check": "neighbour",
+    "where": "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\"",
+    "msg": "framed, 54px of #faq section.section.bg-mist \"Common questions How does AgriCh\" shows",
+    "fix": "keep the next section's heading and picture out of this screen",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "neighbour"
+    ],
+    "wheres": [
+     "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\""
+    ]
+   },
+   {
+    "check": "neighbour",
+    "where": "#faq section.section.bg-mist \"Common questions How does AgriCh\"",
+    "msg": "framed, 497px of the footer shows",
+    "fix": "keep the next section's heading and picture out of this screen",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "neighbour"
+    ],
+    "wheres": [
+     "#faq section.section.bg-mist \"Common questions How does AgriCh\""
+    ]
+   },
+   {
+    "check": "hero-fold",
+    "where": "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\"",
+    "msg": "starts at y 1723, not under the nav",
+    "fix": "the hero fills the first screen alone, its button inside it",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-fold"
+    ],
+    "wheres": [
+     "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\""
+    ]
+   },
+   {
+    "check": "hero-maxchars",
+    "where": "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\"",
+    "msg": "with a 43-character h1 (heroes.json maxChars): starts at y 1723, not under the nav",
+    "fix": "shorten the h1 or give the hero room for the longest headline",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-maxchars"
+    ],
+    "wheres": [
+     "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\""
+    ]
+   },
+   {
+    "check": "neighbour",
+    "where": "#traceability section.section.g2 \"Accountability across every RBK \"",
+    "msg": "framed, 192px of #portals section.section.ground-inverse \"Choose your AgriChain portal Sig\" shows",
+    "fix": "keep the next section's heading and picture out of this screen",
+    "widths": [
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "neighbour"
+    ],
+    "wheres": [
+     "#traceability section.section.g2 \"Accountability across every RBK \""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "flush",
+    "where": "div.at-over > div.ui.ui-panel > div.ui-cursor__foot > button.ui-btn.ui-cursor__go \"Verify and dispense\"",
+    "msg": "section.hero.hero--split and section#workflows run together: 20px between their content, on one ground",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "flush",
+    "where": "div.ui.ui-panel > div.ui-stat__chart > div.ui-stat__axis > span:nth-of-type(1) \"Kharif\"",
+    "msg": "section#workflows and section#traceability run together: 20px between their content, on one ground",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "flush",
+    "where": "div.group:nth-of-type(2) > div.grid > article.card.card--row:nth-of-type(2) > p \"Field inputs, soil tests, and moisture g\"",
+    "msg": "section#traceability and section#portals run together: 20px between their content, on one ground",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "flush",
+    "where": "div.wrap > div.faq > div.faq__item:nth-of-type(4) > p \"Portal forms submit asynchronously to Py\"",
+    "msg": "section#faq and footer#contact run together: 20px between their content, on one ground",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-actions",
+    "where": "(the page)",
+    "msg": "the main action \"Open portal\" does not read word for word the same in the nav or hero and the closing section",
+    "fix": "few actions, one wording: at most 2 in the hero, the main action word for word in nav, hero and close",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "heading-scale",
+    "where": "div.mo-pc__text > ol.mo-pc__steps > li.mo-pc__step:nth-of-type(1) > h3 \"1. Receive stock and verify CCRC leases\"",
+    "msg": "the h3s (18.7px) are only 1.28x smaller than the h2s (24px): one level a clear step (1.3x or more) below the other",
+    "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > a.nav__logo \"AgriChain\"",
+    "msg": "\"AgriChain\" opens a section headed \"Digital agriculture ledger for village RBKs\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(3) > a.nav__link \"Ledger\"",
+    "msg": "\"Ledger\" opens a section headed \"Accountability across every RBK desk\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-length",
+    "where": "section#portals \"Choose your AgriChain portal\"",
+    "msg": "2 sections over 90 words a screen outside the UI mocks (\"Choose your AgriChain po\" 146, \"Common questions\" 122); 41 words a screen across the page (492 words in 12 screens): a tech page says it in about 80 or fewer",
+    "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "one-screen",
+    "where": "section#portals \"Choose your AgriChain portal\"",
+    "msg": "1 section is shorter than the screen, so the next one's heading or picture shows with it: \"Choose your AgriChain portal\" is 661px of the 900px under the nav, and \"Common questions\" shows below it",
+    "fix": "give each section the screen (min-height: 100svh less the nav, its content centred), or join two short ones into one",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "nav.nav__links > div.nav__item:nth-of-type(1) > a.nav__link > svg.chev \"drawing (svg)\"",
+    "msg": "the drawing (svg) is nearly empty at 1440px: 3 colours in its 1424x1424px, 85% one colour (63% of it on screen) (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "div.hero-copy.span-5 > div.btn-row > a.btn.btn--primary > svg.m-arrow \"drawing (svg)\"",
+    "msg": "the drawing (svg) is nearly empty at 1440px: 2 colours in its 1424x1424px, 88.5% one colour (63% of it on screen) (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.frame \"effect (gradient-mesh)\"",
+    "msg": "the effect (gradient-mesh) is nearly empty at 1440px: 2 colours in its 1424x3270px, 65.1% one colour (27% of it on screen) (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(2) > span.ui-note__ico > svg.ui-icon \"drawing (svg)\"",
+    "msg": "the drawing (svg) is nearly empty at 1440px: 3 colours in its 380x380px, 92.7% one colour (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__ico > svg.ui-icon \"drawing (svg)\"",
+    "msg": "the drawing (svg) is nearly empty at 1440px: 3 colours in its 380x380px, 92.7% one colour (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "div.group:nth-of-type(1) > div.grid > article.card.card--row:nth-of-type(1) > div.panel \"effect (painterly-landscape)\"",
+    "msg": "the effect (painterly-landscape) is nearly empty at 1440px: 2 colours in its 1424x1442px, 89.9% one colour (62% of it on screen) (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "div.wrap > div.closing__cta.close--type > a.btn.btn--primary > svg.m-arrow \"drawing (svg)\"",
+    "msg": "the drawing (svg) is nearly empty at 1440px: 2 colours in its 1424x1424px, 88.5% one colour (63% of it on screen) (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "effect-kind",
+    "where": "(the page)",
+    "msg": "the page has effects but no prefers-reduced-motion branch in its scripts or styles: reduced motion must show the finished still",
+    "fix": "under prefers-reduced-motion: reduce, show each effect's finished still and stop its motion",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "empty-area",
+    "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+    "msg": "39% of the section is empty: 39% beside content that covers under half the container, in its 1486px of rows (WARN over 35%, FAIL over 50%)",
+    "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "share-meta",
+    "where": "head",
+    "msg": "the head lacks og:image, twitter:card, an icon: a shared link shows no picture or title of its own",
+    "fix": "copy the head block of starter.html: og tags, twitter:card, the icon and theme-color (references/system.md, Head)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "tap-size",
+    "where": "div.wrap > div.db-strip > div:nth-of-type(2) > a.link \"Database setup\"",
+    "msg": "a 96x18px tap target: under the 44px a phone needs",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#portals / section#faq",
+    "msg": "28px between these sections, +40% against the median 20px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-family",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav's links and actions use 2 type families (Times, Arial)",
+    "fix": "keep one nav on every screen: the same bar, fill, links and type",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 278,
+   "layout": 15
+  }
+ },
+ "open": [
+  {
+   "check": "assets",
+   "where": "(the page)",
+   "msg": "the stylesheet static/assets/system.css did not load (404): everything here was measured without it",
+   "fix": "fix the path, or remove the reference",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "assets"
+   ],
+   "wheres": [
+    "(the page)"
+   ]
+  },
+  {
+   "check": "nav",
+   "where": "(the first screen)",
+   "msg": "no nav bar across the top of the first screen (a header with the brand, the section links and the main action)",
+   "fix": "make the nav one bar from the content's left edge to its right edge, with every link and action inside it",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "nav"
+   ],
+   "wheres": [
+    "(the first screen)"
+   ]
+  },
+  {
+   "check": "no-visual",
+   "where": "section#portals \"Choose your AgriChain portal\"",
+   "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "no-visual"
+   ],
+   "wheres": [
+    "section#portals \"Choose your AgriChain portal\""
+   ]
+  },
+  {
+   "check": "text-only",
+   "where": "section#faq \"Common questions\"",
+   "msg": "the closing section is only text: no picture, icon, mock or effect in it",
+   "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "text-only"
+   ],
+   "wheres": [
+    "section#faq \"Common questions\""
+   ]
+  },
+  {
+   "check": "cta",
+   "where": "main#top > section.hero.hero--split",
+   "msg": "the hero has no button (the nav's does not count)",
+   "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "cta"
+   ],
+   "wheres": [
+    "main#top > section.hero.hero--split"
+   ]
+  },
+  {
+   "check": "cta",
+   "where": "section#faq \"Common questions\"",
+   "msg": "the last section before the footer ends with no button",
+   "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "cta"
+   ],
+   "wheres": [
+    "section#faq \"Common questions\""
+   ]
+  },
+  {
+   "check": "copy-fact",
+   "where": "h1#hero-h \"Digital agriculture ledger for village R\"",
+   "msg": "the first screen holds no number, price, date, place, platform or genre",
+   "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "copy-fact"
+   ],
+   "wheres": [
+    "h1#hero-h \"Digital agriculture ledger for village R\""
+   ]
+  },
+  {
+   "check": "copy-headings",
+   "where": "h2#workflows-h \"Three field workflows. Stock receiving t\"",
+   "msg": "\"Three field workflows. Stock receiving to KCC credit offset.\" names no product, part, place or section (14 headings like it; at most one brand line per page) (and 13 more like it: \"Accountability across ev\", \"Tracks every stock movem\", \"Enforces per-acre quota \", \"Clears KCC debt before D\", ...)",
+   "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "copy-headings"
+   ],
+   "wheres": [
+    "h2#workflows-h \"Three field workflows. Stock receiving t\""
+   ]
+  },
+  {
+   "check": "heading-scale",
+   "where": "h2#faq-h \"Common questions\"",
+   "msg": "an h2 at 46.1px, as large as the h1 (32px) or larger",
+   "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "heading-scale"
+   ],
+   "wheres": [
+    "h2#faq-h \"Common questions\""
+   ]
+  },
+  {
+   "check": "section-gaps",
+   "where": "section#portals / section#faq",
+   "msg": "38px between these sections, +90% against the median 20px",
+   "fix": "use one gap between sections (all within 25% of each other)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-gaps"
+   ],
+   "wheres": [
+    "section#portals / section#faq"
+   ]
+  },
+  {
+   "check": "hole",
+   "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+   "msg": "an empty hole 576x1128px inside the section (125% of the screen's height), with content above and below it",
+   "fix": "close the empty space: move the content together, or give the space the visual it lacks",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "hole"
+   ],
+   "wheres": [
+    "section#workflows \"Three field workflows. Stock receiving t\""
+   ]
+  },
+  {
+   "check": "effect-kind",
+   "where": "section#workflows",
+   "msg": "2 [data-moment] marks that never run: pinned-chapters on section#workflows (moments.js never mounted it); liquid-type on section#faq > div.wrap > div.section-head (moments.js never mounted it); a moment is judged as one only when it runs",
+   "fix": "load assets/moments/moments.js (system.js does it for a page with [data-moment]) and keep the dealt id, or take the data-moment mark off the section",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "effect-kind"
+   ],
+   "wheres": [
+    "section#workflows"
+   ]
+  },
+  {
+   "check": "section-tile",
+   "where": "section#portals \"Choose your AgriChain portal\"",
+   "msg": "the section is 661px tall (0.73 screens at 1440x900), shorter than the screen: its tile (the screen from its top) shows 661px of it and 201px of the next section, its heading \"Common questions\" on screen",
+   "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-tile"
+   ],
+   "wheres": [
+    "section#portals \"Choose your AgriChain portal\""
+   ]
+  },
+  {
+   "check": "empty-area",
+   "where": "section#portals \"Choose your AgriChain portal\"",
+   "msg": "60% of the section is empty: 61% beside content that covers under half the container, in its 661px of rows (WARN over 35%, FAIL over 50%)",
+   "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "empty-area"
+   ],
+   "wheres": [
+    "section#portals \"Choose your AgriChain portal\""
+   ]
+  },
+  {
+   "check": "hero-screen",
+   "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+   "msg": "the hero ends at 6729px on a 900px screen, 5829px below the fold: it ends at the fold, 1px either way (SR-1)",
+   "fix": "make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "hero-screen"
+   ],
+   "wheres": [
+    "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+   ]
+  },
+  {
+   "check": "section-height",
+   "where": "section#traceability \"Accountability across every RBK desk Tra\"",
+   "msg": "the section is 2438px tall (2.7 screens), 638px over two screens (1800px): every section after the hero is one screen or two, 2px either way (SR-2)",
+   "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-height",
+    "screen-height"
+   ],
+   "wheres": [
+    "section#traceability \"Accountability across every RBK desk Tra\"",
+    "#traceability section.section.g2 \"Accountability across every RBK \""
+   ]
+  },
+  {
+   "check": "section-height",
+   "where": "section#faq \"Common questions How does AgriChain prev\"",
+   "msg": "the section is 383px tall (0.4 screens), 517px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)",
+   "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-height",
+    "screen-short",
+    "screen-height"
+   ],
+   "wheres": [
+    "section#faq \"Common questions How does AgriChain prev\"",
+    "#faq section.section.bg-mist \"Common questions How does AgriCh\""
+   ]
+  },
+  {
+   "check": "section-height",
+   "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+   "msg": "the section is 1486px tall (1.7 screens), 315px short of two screens (1800px): every section after the hero is one screen or two, 2px either way (and 2 more like it: \"Choose your AgriChain po\", \"Open your AgriChain port\") (SR-2)",
+   "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-height",
+    "screen-height"
+   ],
+   "wheres": [
+    "section#workflows \"Three field workflows. Stock receiving t\"",
+    "#workflows section.section.bg-dots \"Three field workflows. Stock rec\""
+   ]
+  },
+  {
+   "check": "section-air",
+   "where": "section#workflows / section#traceability",
+   "msg": "20px of air between the content of these two sections: 128-480px (64-600px WARN) (every gap out of the band at 1440px, top to bottom: 20px after \"Three field workflow\", 20px after \"Accountability acros\", 38px after \"Choose your AgriChai\") (SR-3)",
+   "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-air"
+   ],
+   "wheres": [
+    "section#workflows / section#traceability"
+   ]
+  },
+  {
+   "check": "section-air",
+   "where": "section#traceability / section#portals",
+   "msg": "20px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+   "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-air"
+   ],
+   "wheres": [
+    "section#traceability / section#portals"
+   ]
+  },
+  {
+   "check": "section-air",
+   "where": "section#portals / section#faq",
+   "msg": "38px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+   "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-air"
+   ],
+   "wheres": [
+    "section#portals / section#faq"
+   ]
+  },
+  {
+   "check": "one-section",
+   "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+   "msg": "the screen at scroll 6300px (stride 7) shows 429px of section 1 and the content of 2 sections, over 24px each beside section 2: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+   "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "one-section"
+   ],
+   "wheres": [
+    "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+   ]
+  },
+  {
+   "check": "one-section",
+   "where": "h2#faq-h \"Common questions\"",
+   "msg": "the screen at scroll 10800px (stride 12) shows 288px of section 5 and the heading of section 5 whole and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+   "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "one-section"
+   ],
+   "wheres": [
+    "h2#faq-h \"Common questions\""
+   ]
+  },
+  {
+   "check": "one-heading",
+   "where": "h2#faq-h \"Common questions\"",
+   "msg": "headings of two sections show whole on one screen at 13 of 255 scroll positions (5.1%; at scroll 10600, 10650, 10700, 10950px), here with \"Choose your AgriChain portal\": at most 3% on a desktop (SR-5)",
+   "fix": "make the sections one screen tall so their headings sit a screen apart and two never share one",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "one-heading"
+   ],
+   "wheres": [
+    "h2#faq-h \"Common questions\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "header.nav.nav--centre \"Skip to content AgriChain Portals Role P\"",
+   "msg": "the nav's content runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+   "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "header.nav.nav--centre \"Skip to content AgriChain Portals Role P\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\"",
+   "msg": "the content of section 1 runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+   "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "main#top > section.hero.hero--split \"MySQL ledger online · 12 farmers, 5 read\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "section#workflows \"Three field workflows. Stock receiving t\"",
+   "msg": "the content of section 2 runs 8px from the left and 8px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (and 4 more like it: \"Accountability across ev\", \"Choose your AgriChain po\", \"Common questions How doe\") (SR-6)",
+   "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "section#workflows \"Three field workflows. Stock receiving t\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "div.hero-copy.span-5 > dl.hero-facts > div:nth-of-type(1) > dd \"RBK, Farmer, Buyer\"",
+   "msg": "12 text blocks start on a left line at x 48, 40px from the container's left: text starts on the container's left, or on one split line (x 611, 732, 853) (also \"2.0 bags/acre\", \"26 centers\", \"1. Receive stock and verify CCRC\") (SR-6)",
+   "fix": "start the text on the container's left, or on the one split line every split shares",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "div.hero-copy.span-5 > dl.hero-facts > div:nth-of-type(1) > dd \"RBK, Farmer, Buyer\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__ico > svg.ui-icon",
+   "msg": "a <svg> over half the container wide runs 48-1432px, not on the container's lines at 8-1432px (SR-6)",
+   "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__ico > svg.ui-icon"
+   ]
+  },
+  {
+   "check": "flush",
+   "where": "div.at-over > div.ui.ui-panel > div.ui-cursor__foot > button.ui-btn.ui-cursor__go \"Verify and dispense\"",
+   "msg": "its button sits 0px above the lower edge of section.hero.hero--split, where the ground changes to section#workflows",
+   "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "flush"
+   ],
+   "wheres": [
+    "div.at-over > div.ui.ui-panel > div.ui-cursor__foot > button.ui-btn.ui-cursor__go \"Verify and dispense\""
+   ]
+  },
+  {
+   "check": "tap-size",
+   "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(2) > a.nav__link \"Workflows\"",
+   "msg": "a 70x18px tap target (and 2 more like it on this screen): 0px from the next one (\"Database setupMySQL host\"), so a thumb lands on the wrong one",
+   "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+   "widths": [
+    390,
+    320
+   ],
+   "from": "consistency",
+   "ids": [
+    "tap-size"
+   ],
+   "wheres": [
+    "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(2) > a.nav__link \"Workflows\""
+   ]
+  },
+  {
+   "check": "tap-size",
+   "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Open portal\"",
+   "msg": "a 76x18px tap target: 0px from the next one (\"Questions\"), so a thumb lands on the wrong one",
+   "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+   "widths": [
+    390,
+    320
+   ],
+   "from": "consistency",
+   "ids": [
+    "tap-size"
+   ],
+   "wheres": [
+    "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Open portal\""
+   ]
+  },
+  {
+   "check": "tap-size",
+   "where": "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle",
+   "msg": "a 34x27px tap target: 0px from the next one (\"Sign in\"), so a thumb lands on the wrong one",
+   "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+   "widths": [
+    390,
+    320
+   ],
+   "from": "consistency",
+   "ids": [
+    "tap-size"
+   ],
+   "wheres": [
+    "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle"
+   ]
+  },
+  {
+   "check": "tap-size",
+   "where": "div.span-3.start-7 > ul > li:nth-of-type(1) > a \"RBK Employee\"",
+   "msg": "a 102x18px tap target (and 5 more like it on this screen): 0px from the next one (\"Farmer\"), so a thumb lands on the wrong one",
+   "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+   "widths": [
+    390,
+    320
+   ],
+   "from": "consistency",
+   "ids": [
+    "tap-size"
+   ],
+   "wheres": [
+    "div.span-3.start-7 > ul > li:nth-of-type(1) > a \"RBK Employee\""
+   ]
+  },
+  {
+   "check": "fold-cut",
+   "where": "h1#hero-h \"Digital agriculture ledger for village R\"",
+   "msg": "a 32px line is sliced by the bottom of the first screen (32px of it below the fold)",
+   "fix": "size the hero so the heading ends above the fold, or starts below it",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "fold-cut"
+   ],
+   "wheres": [
+    "h1#hero-h \"Digital agriculture ledger for village R\""
+   ]
+  },
+  {
+   "check": "section-gaps",
+   "where": "section#workflows / section#traceability",
+   "msg": "36px between these sections, +80% against the median 20px",
+   "fix": "use one gap between sections (all within 25% of each other)",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-gaps"
+   ],
+   "wheres": [
+    "section#workflows / section#traceability"
+   ]
+  },
+  {
+   "check": "section-tile",
+   "where": "footer#contact \"Open your AgriChain portal\"",
+   "msg": "the section is 793px tall (0.94 screens at 390x844), shorter than the screen: its tile, held at the page's end (scroll 6996px) shows 793px of it and 24px of the section above (\"Common questions\"), its text \"Portal forms submit asynchrono\" on screen",
+   "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-tile"
+   ],
+   "wheres": [
+    "footer#contact \"Open your AgriChain portal\""
+   ]
+  },
+  {
+   "check": "menu-toggle",
+   "where": "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle \"Menu\"",
+   "msg": "the menu button keeps aria-expanded=\"false\" after a click: its state never changes (system.js flips it on .nav__toggle)",
+   "fix": "use the starter's button: <button class=\"nav__toggle\" type=\"button\" aria-expanded=\"false\" aria-label=\"Menu\">; system.js flips it",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "menu-toggle"
+   ],
+   "wheres": [
+    "header.nav.nav--centre > div.wrap.nav__bar > button.nav__toggle \"Menu\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "nav logo",
+   "msg": "at x 108.5, the page's left line is 8",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "nav logo"
+   ]
+  },
+  {
+   "check": "edge-right",
+   "where": "nav actions",
+   "msg": "end at x 133.8, the page's right line is 1432",
+   "fix": "end it on the .wrap right line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-right"
+   ],
+   "wheres": [
+    "nav actions"
+   ]
+  },
+  {
+   "check": "neighbour",
+   "where": "#workflows section.section.bg-dots \"Three field workflows. Stock rec\"",
+   "msg": "framed, 247px of #traceability section.section.g2 \"Accountability across every RBK \" shows",
+   "fix": "keep the next section's heading and picture out of this screen",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "neighbour"
+   ],
+   "wheres": [
+    "#workflows section.section.bg-dots \"Three field workflows. Stock rec\""
+   ]
+  },
+  {
+   "check": "screen-short",
+   "where": "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\"",
+   "msg": "661px tall; one screen under the nav is 900px",
+   "fix": "make the section one full screen (--h: 1, layout-v4.md section 2)",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "screen-short",
+    "screen-height"
+   ],
+   "wheres": [
+    "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\""
+   ]
+  },
+  {
+   "check": "neighbour",
+   "where": "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\"",
+   "msg": "framed, 54px of #faq section.section.bg-mist \"Common questions How does AgriCh\" shows",
+   "fix": "keep the next section's heading and picture out of this screen",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "neighbour"
+   ],
+   "wheres": [
+    "#portals section.section.ground-inverse \"Choose your AgriChain portal Sig\""
+   ]
+  },
+  {
+   "check": "neighbour",
+   "where": "#faq section.section.bg-mist \"Common questions How does AgriCh\"",
+   "msg": "framed, 497px of the footer shows",
+   "fix": "keep the next section's heading and picture out of this screen",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "neighbour"
+   ],
+   "wheres": [
+    "#faq section.section.bg-mist \"Common questions How does AgriCh\""
+   ]
+  },
+  {
+   "check": "hero-fold",
+   "where": "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\"",
+   "msg": "starts at y 1723, not under the nav",
+   "fix": "the hero fills the first screen alone, its button inside it",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-fold"
+   ],
+   "wheres": [
+    "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\""
+   ]
+  },
+  {
+   "check": "hero-maxchars",
+   "where": "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\"",
+   "msg": "with a 43-character h1 (heroes.json maxChars): starts at y 1723, not under the nav",
+   "fix": "shorten the h1 or give the hero room for the longest headline",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-maxchars"
+   ],
+   "wheres": [
+    "section.hero.hero--split section.hero.hero--split \"MySQL ledger online · 12 farmers\""
+   ]
+  },
+  {
+   "check": "neighbour",
+   "where": "#traceability section.section.g2 \"Accountability across every RBK \"",
+   "msg": "framed, 192px of #portals section.section.ground-inverse \"Choose your AgriChain portal Sig\" shows",
+   "fix": "keep the next section's heading and picture out of this screen",
+   "widths": [
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "neighbour"
+   ],
+   "wheres": [
+    "#traceability section.section.g2 \"Accountability across every RBK \""
+   ]
+  }
+ ],
+ "waived": [],
+ "warnCount": 23,
+ "at": "2026-11-25T18:44:16.261Z"
+}
